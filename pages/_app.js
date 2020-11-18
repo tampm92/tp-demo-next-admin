@@ -4,7 +4,7 @@ import Head from "next/head";
 import LayoutDefault from "@/layouts/default";
 
 import 'antd/dist/antd.css'
-import "@/styles/globals.css";
+import "@/assets/styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
