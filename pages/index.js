@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Row, Dropdown, Icon, Menu, DatePicker } from 'antd'
 import moment from 'moment'
 import {
@@ -12,6 +12,15 @@ import {
   CardStyled,
   ShadowCard
 } from '@/components/partials/dashboard/style'
+import dynamic from 'next/dynamic'
+const Line = dynamic(
+  () => import("@ant-design/charts").then((mod) => mod.Line),
+  { ssr: false }
+)
+const Rose = dynamic(
+  () => import("@ant-design/charts").then((mod) => mod.Rose),
+  { ssr: false }
+)
 
 const { RangePicker } = DatePicker
 
@@ -76,6 +85,70 @@ export default function Home() {
     )
   }
 
+  const [dataLine, setDataLine] = useState([]);
+  useEffect(() => {
+    asyncLineFetch();
+  }, []);
+  const asyncLineFetch = () => {
+    fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
+      .then((response) => response.json())
+      .then((json) => setDataLine(json))
+      .catch((error) => {
+        console.log('fetch data failed', error);
+      });
+  };
+  var configLine = {
+    data: dataLine,
+    xField: 'year',
+    yField: 'value',
+    seriesField: 'category',
+    yAxis: {
+      label: {
+        formatter: function formatter(v) {
+          return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
+            return ''.concat(s, ',');
+          });
+        },
+      },
+    },
+    color: ['#1979C9', '#D62A0D', '#FAA219'],
+  }
+
+  var dataRose = [
+    {
+      type: 'Type 1',
+      value: 27,
+    },
+    {
+      type: 'Type 2',
+      value: 25,
+    },
+    {
+      type: 'Type 3',
+      value: 18,
+    },
+    {
+      type: 'Type 4',
+      value: 15,
+    },
+    {
+      type: 'Type 5',
+      value: 10,
+    },
+    {
+      type: 'Other',
+      value: 5,
+    },
+  ];
+  var configRose = {
+    data: dataRose,
+    xField: 'type',
+    yField: 'value',
+    seriesField: 'type',
+    radius: 0.9,
+    legend: { position: 'bottom' },
+  };
+
   return (
     <>
       <Row gutter={16}>
@@ -123,6 +196,13 @@ export default function Home() {
                   TOTAL_COMMENTS={state.TOTAL_COMMENTS}
                 />
               </ShadowCard>
+            </ColStyled>
+
+            <ColStyled xs={24} lg={12}>
+              <Line {...configLine} />
+            </ColStyled>
+            <ColStyled xs={24} lg={12}>
+              <Rose {...configRose} />
             </ColStyled>
 
           </CardStyled>
