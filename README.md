@@ -5,6 +5,7 @@
 - [ReactJS](https://reactjs.org/)
 - [NextJS Basic Setup](https://nextjs.org/learn/basics/create-nextjs-app)
 - [Ant Design](https://ant.design/)
+- [Charts Ant Design](https://charts.ant.design/)
 
 ## Getting Started
 

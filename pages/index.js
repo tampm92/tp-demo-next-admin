@@ -166,7 +166,7 @@ export default function Home() {
             }
             type="stats"
           >
-            <ColStyled xs={24} lg={12}>
+            <ColStyled xs={24} md={12} lg={6}>
               <ShadowCard>
                 <UserCard
                   TOTAL_USERS={state.TOTAL_USERS}
@@ -174,7 +174,7 @@ export default function Home() {
               </ShadowCard>
             </ColStyled>
 
-            <ColStyled xs={24} lg={12}>
+            <ColStyled xs={24} md={12} lg={6}>
               <ShadowCard>
                 <VisitCard
                   TOTAL_VISITS={state.TOTAL_VISITS}
@@ -182,7 +182,7 @@ export default function Home() {
               </ShadowCard>
             </ColStyled>
 
-            <ColStyled xs={24} lg={12}>
+            <ColStyled xs={24} md={12} lg={6}>
               <ShadowCard>
                 <LikeCard
                   TOTAL_LIKES={state.TOTAL_LIKES}
@@ -190,7 +190,7 @@ export default function Home() {
               </ShadowCard>
             </ColStyled>
 
-            <ColStyled xs={24} lg={12}>
+            <ColStyled xs={24} md={12} lg={6}>
               <ShadowCard>
                 <CommentCard
                   TOTAL_COMMENTS={state.TOTAL_COMMENTS}
